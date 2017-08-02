@@ -60,4 +60,10 @@ public class OrderServiceImpl implements OrderService {
 		return order;
 	}
 	
+	@Override
+	public void updateOrder(Order order) throws Exception {
+		OrderDao od = (OrderDao) BeanFactory.getBean("OrderDao");
+		od.update(order);
+	}
+	
 }

@@ -17,4 +17,6 @@ public interface OrderDao {
 
 	Order getById(String oid) throws Exception;
 
+	void update(Order order)throws Exception;
+
 }

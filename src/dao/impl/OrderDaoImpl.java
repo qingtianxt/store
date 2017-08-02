@@ -14,7 +14,6 @@ import dao.OrderDao;
 import domain.Order;
 import domain.OrderItem;
 import domain.Product;
-import net.sf.ehcache.search.expression.Or;
 import utils.DataSourceUtils;
 
 public class OrderDaoImpl implements OrderDao {
@@ -104,6 +103,17 @@ public class OrderDaoImpl implements OrderDao {
 		}
 		
 		return order;
+	}
+	/**
+	 * ÐÞ¸Ä¶©µ¥
+	 */
+	@Override
+	public void update(Order order) throws Exception {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		
+		String sql  ="update orders set state=?,address=?,name=?,telephone=? where oid=?";
+		qr.update(sql,order.getState(),order.getAddress(),order.getName(),order.getTelephone(),order.getOid());
 	}
 
 }

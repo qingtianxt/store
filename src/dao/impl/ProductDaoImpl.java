@@ -1,5 +1,6 @@
 package dao.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -67,6 +68,35 @@ public Product getByPid(String pid) throws Exception {
 		return ((Long)qr.query(sql,new ScalarHandler(),cid)).intValue();
 		//return ((long)qr.query(sql, new ScalarHandler(),cid)).intValue();
 		//小写的long是错误的
+	}
+	/**
+	 * 更新商品的cid未删除分类的时候准备
+	 */
+	@Override
+	public void updateCid(String cid) throws Exception {
+		QueryRunner qr = new QueryRunner();
+		String sql ="update product set cid=null where cid=? ";
+		qr.update(DataSourceUtils.getConnection(),sql,cid);
+	}
+	
+	@Override
+	public List<Product> findAll() throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from product";
+		
+		return qr.query(sql, new BeanListHandler<>(Product.class));
+	}
+	/**
+	 * 添加商品
+	 * @throws SQLException 
+	 */
+	@Override
+	public void add(Product p) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql= "insert into product values(?,?,?,?,?,?,?,?,?,?);";
+		qr.update(sql, p.getPid(),p.getPname(),p.getMarket_price(),
+				p.getShop_price(),p.getPimage(),p.getPdate(),
+				p.getIs_hot(),p.getPdesc(),p.getPflag(),p.getCategory().getCid());
 	}
 	
 }

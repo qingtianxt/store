@@ -8,7 +8,7 @@
 		<script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
 		<script type="text/javascript">
 			function addProduct(){
-				window.location.href = "${pageContext.request.contextPath}/adminProduct_addPage.action";
+				window.location.href = "${pageContext.request.contextPath}/adminProduct?method=addUI";
 			}
 		</script>
 	</HEAD>

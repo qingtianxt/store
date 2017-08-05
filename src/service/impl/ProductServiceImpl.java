@@ -7,6 +7,7 @@ import dao.impl.ProductDaoImpl;
 import domain.PageBean;
 import domain.Product;
 import service.ProductService;
+import utils.BeanFactory;
 
 public class ProductServiceImpl implements ProductService {
 
@@ -47,5 +48,20 @@ public class ProductServiceImpl implements ProductService {
 		int totalCount = dao.getTotalCount(cid);
 		
 		return new PageBean<>(list, currPage, pageSize, totalCount);
+	}
+	@Override
+	public List<Product> findAll() throws Exception {
+		ProductDao pd = (ProductDao) BeanFactory.getBean("ProductDao");
+		
+		return pd.findAll();
+	}
+	/**
+	 * ÃÌº”…Ã∆∑
+	 */
+	@Override
+	public void add(Product p) throws Exception {
+		// TODO Auto-generated method stub
+		ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
+		pdao.add(p);
 	}
 }

@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import domain.Order;
 import domain.PageBean;
 import domain.User;
@@ -14,5 +16,7 @@ public interface OrderService {
 	
 	
 	void updateOrder(Order order)throws Exception;
+
+	List<Order> findAllByState(String state) throws Exception;
 	
 }

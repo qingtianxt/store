@@ -7,8 +7,9 @@
 	</HEAD>
 	
 	<body>
-		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/adminCategory" method="post">
-			
+		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/adminCategory?method=update" method="post">
+			<!-- 隐藏域 存放cid -->
+			<input type="hidden" name="cid" value="${bean.cid }">
 			&nbsp;
 			<table cellSpacing="1" cellPadding="5" width="100%" align="center" bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 				<tr>
@@ -24,7 +25,7 @@
 						一级分类名称：
 					</td>
 					<td class="ta_01" bgColor="#ffffff" colspan="3">
-						<input type="text" name="cname" id="userAction_save_do_logonName" class="bg"/>
+						<input type="text" name="cname" id="userAction_save_do_logonName" value="${bean.cname }" class="bg"/>
 						</td>
 				</tr>
 			

@@ -274,8 +274,30 @@ public class OrderServlet extends BaseServlet {
 			System.out.println("数据被篡改！");
 		}
 		
+			
+		return "/jsp/msg.jsp";	
 		
-		return "/jsp/msg.jsp";
+	}
+	
+	/**
+	 * 确认收货
+//	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateState(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		//获取oid
+		String oid = request.getParameter("oid");
+		//调用service 修改订单状态
+		OrderService os = (OrderService) BeanFactory.getBean("OrderService");
+		Order order = os.getById(oid);
+		order.setState(3);
+		os.updateOrder(order);
 		
+		//重定向
+		response.sendRedirect(request.getContextPath()+"/order?method=findAllByPage&currPage=1");
+		
+		return null;
 	}
 }
